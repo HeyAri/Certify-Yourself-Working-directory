@@ -5,14 +5,12 @@
         <div class="container">
             <div class="mbr-table">
                 <div class="mbr-table-cell">
-
                     <div class="navbar-brand">
                         <a href="HTTP://center4certs.org" class="navbar-logo">
                             <img src="assets/images/c4c-logo-2000x1241.png" alt="Center For Certification" title="Center For Certification">
                         </a>
                         <a class="navbar-caption" href="index.php">Center For Certification</a>
                     </div>
-
                 </div>
                 <div class="mbr-table-cell">
                     <button class="navbar-toggler pull-xs-right" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
