@@ -61,7 +61,7 @@
     // Email pinging Admin
     $headers	= "Content-Type: text/plain; charset=iso-8859-1\n";
     $headers	.= "From: $fullName <$email>\n";
-    $recipient	= "heyari@aris.work";
+    $recipient	= "ari@aris.work";
     $subject	= "Someone Certified Themselves";
     $message	= wordwrap($certification, 1024);
     mail($recipient, $subject, $message, $headers);
