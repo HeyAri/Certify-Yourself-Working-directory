@@ -153,13 +153,13 @@
                         <div class="col-md-4">
                             <select id="color" name="color" class="form-control">
                                 <option selected>Select your certificate border color</option>
-                                <option value="images/C4C-blk.png">Plain old black</option>
-                                <option value="images/C4C-royal.png">Plain old blue</option>
-                                <option value="images/C4C-grn.png">Plain old green</option>
-                                <option value="images/C4C-red.png">Plain old red</option>
-                                <option value="images/C4C_grn_brn.png">Plain-ish green</option>
-                                <option value="images/C4C_curly.png">Regular ornate</option>
-                                <option value="images/C4C_gold.png">Super ornate</option>
+                                <option value="blk">Plain old black</option>
+                                <option value="royal">Plain old blue</option>
+                                <option value="grn">Plain old green</option>
+                                <option value="red">Plain old red</option>
+                                <!-- <option value="grn_brn">Plain-ish green</option> -->
+                                <!-- <option value="curly">Regular ornate</option> -->
+                                <!-- <option value="gold">Super ornate</option> -->
                             </select>
                         </div>
                         <br>
@@ -182,6 +182,16 @@
                         </div>
                         <br>
                         <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-center" id="thumbnail"></div>
+                        <script>
+                            $('#color').change(function(){
+                                $('#thumbnail').html('<img src="images/C4C-'+ $('#color').val() +'-thmb.png" />')
+                            });
+                        </script>
                     </td>
                 </tr>
                 <tr>
