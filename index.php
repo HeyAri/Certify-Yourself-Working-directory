@@ -34,9 +34,9 @@
             </div>
         </nav>
     </section>
-    <section class="mbr-section article mbr-parallax-background mbr-after-navbar" id="msg-box8-1" style="background-image: url(assets/images/certificate-hero-2000x1500.png); padding-top: 120px; padding-bottom: 120px;">
+    <section class="mbr-section article mbr-parallax-background mbr-after-navbar" id="msg-box8-1" style="background-image: url(assets/images/certificate-hero-2000x1500.png); height:60vh">
         <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(126, 155, 159);"></div>
-        <div class="container">
+        <div class="container" style="top:30%;">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-xs-center">
                     <h3 class="mbr-section-title display-2">Center For Certification</h3>
@@ -48,7 +48,7 @@
         </div>
     </section>
     <section class="mbr-section article mbr-section__container" id="content1-2" style="background-color: rgb(0, 0, 0); padding-top: 20px; padding-bottom: 20px;">
-        <div class="ssk-group" align="right">
+        <div class="container ssk-group" align="right">
             <a href="" class="ssk ssk-facebook"></a>
             <a href="" class="ssk ssk-twitter"></a>
             <a href="" class="ssk ssk-google-plus"></a>
@@ -56,7 +56,7 @@
             <a href="" class="ssk ssk-email"></a>
         </div>
     </section>
-    <section class="mbr-section article mbr-section__container" id="content1-2" style="background-color: rgb(255, 255, 255); padding-top: 20px; padding-bottom: 20px;">
+    <section class="mbr-section article mbr-section__container" id="content1-2" style="background-color: rgb(255, 255, 255); padding-top: 60px; padding-bottom: 0px;">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 lead">
@@ -70,7 +70,7 @@
             </div>
         </div>
     </section>
-    <section class="mbr-section" id="form1-3" style="background-color: rgb(255, 255, 255); padding-top: 120px; padding-bottom: 120px;">
+    <section class="mbr-section" id="form1-3" style="background-color: rgb(255, 255, 255); padding-top: 60px; padding-bottom: 60px;">
 
         <?php
             // this starts the session
@@ -83,7 +83,7 @@
             <table width="100%" align="center">
                 <tr>
                     <td>
-                        <label class="col-md-4 control-label" for="fullName">Full Name</label>
+                        <label class="col-md-4 text-right control-label" for="fullName">Full Name</label>
                         <div class="col-md-4">
                             <input id="fullName" name="fullName" type="text" placeholder="First Last" class="form-control input-md" required type="text">
                         </div>
@@ -91,7 +91,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label class="col-md-4 control-label" for="email">Email</label>
+                        <label class="col-md-4 text-right control-label" for="email">Email</label>
                         <div class="col-md-4">
                             <input id="email" name="email" placeholder="name@domain.com" class="form-control input-md" required type="text">
                         </div>
@@ -99,7 +99,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label class="col-md-4 control-label" for="cert">Certification Desired</label>
+                        <label class="col-md-4 text-right control-label" for="cert">Certification Desired</label>
                         <div class="col-md-4">
                             <select id="cert" name="cert" class="form-control">
                                 <option selected>Select your certification</option>
@@ -139,7 +139,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label class="col-md-4 control-label" for="cert">You Selected</label>
+                        <label class="col-md-4 text-right control-label" for="cert">You Selected</label>
                         <div class="col-md-4">
                             <input type="text" name="certification" id="certification" placeholder="Or type yours in here" class="form-control input-md" required>
                         </div>
@@ -149,7 +149,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label class="col-md-4 control-label" for="cert">Certificate Color</label>
+                        <label class="col-md-4 text-right control-label" for="cert">Certificate Color</label>
                         <div class="col-md-4">
                             <select id="color" name="color" class="form-control">
                                 <option selected>Select your certificate border color</option>
@@ -169,7 +169,7 @@
                 <tr>
                     <td>
                         <!-- Multiple Radios -->
-                        <label class="col-md-4 control-label" align="left" for="human">I am a human</label>
+                        <label class="col-md-4 text-right control-label" align="left" for="human">I am a human</label>
                         <div class="col-md-4">
                             <div class="radio">
                                 <label for="human-0" style="margin-left: 0px;">Yes, I am human</label>
@@ -187,10 +187,8 @@
                 <tr>
                     <td>
                         <!-- Button -->
-                        <div class="form-group" align="right">
-                            <div class="col-md-4" align="center">
-                                <button id="submit" name="submit" class="btn btn-primary" align="center" value="Generate Certificate">Get Your Certificate</button>
-                            </div>
+                        <div class="form-group" align="center">
+                            <button id="submit" name="submit" class="btn btn-primary" align="center" value="Generate Certificate">Get Your Certificate</button>
                         </div>
                     </td>
                 </tr>
@@ -202,6 +200,12 @@
             <input type="hidden" name="cert" value="<?php echo  $_SESSION['certification']; ?>">
             <input type="hidden" name="color" value="<?php echo  $_SESSION['color']; ?>">
         </form>
+        <style>
+            .control-label {
+                padding: 10px;
+                margin: 0;
+            }
+        </style>
     </section>
     <section class="mbr-section mbr-parallax-background" id="testimonials4-5" style="background-image: url(assets/images/certificate-hero-2000x1500.png); padding-top: 120px; padding-bottom: 120px;">
         <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(146, 146, 157);"></div>
