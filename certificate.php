@@ -23,49 +23,41 @@
         </nav>
     </section>
     <section>
-
-    <?php
-
-        // this starts the session
-        session_start();
-
-        // little script to pull the current date/time; can also be done via JavaScript or 100 other ways
-        include($_SERVER['DOCUMENT_ROOT']."/includes/now.fn");
-
-        // this pulls input variables from the session form
-        $_SESSION['fullName']		= $_POST['fullName'];
-        $_SESSION['email']			= $_POST['email'];
-        $_SESSION['certification'] 	= $_POST['certification'];
-        $_SESSION['color'] 			= $_POST['color'];
-
-    ?>
         <center>
-            <table width="1000" height="768" border="0" cellpadding="2" cellspacing="2" background="
-            <?php echo  $_SESSION['color']; ?>">
+            <table width="1000" height="768" border="0" cellpadding="2" cellspacing="2" background="images/C4C-<?php echo $_POST['certColor']; ?>.png">
             	<tr>
             		<td width="958" align="center">
-                    	<h3><font face="klarissa_contourregular"><?php echo date('jS \of F\, Y'); ?></font><br /></h3>
+                        <h3><font face="klarissa_contourregular"><?php echo $_POST['certDate'] ?></font><br /></h3>
                     		<img src="images/spacer.gif" width="415" height="106"><br>
-            			<h2><font face="klarissa_contourregular"><?php echo  $_SESSION['certification']; ?></font><br /></h2>
+            			<h2><font face="klarissa_contourregular"><?php echo  $_POST['certification']; ?></font><br /></h2>
             				<img src="images/spacer.gif" width="413" height="98"><br>
-            			<h1><font face="klarissa_contourregular"><?php echo  $_SESSION['fullName']; ?></font><br />
-                        </h1>
+            			<h1><font face="klarissa_contourregular"><?php echo  $_POST['fullName']; ?></font><br /></h1>
                 	</td>
             	</tr>
             </table>
         </center>
     </section>
-
 <?php
 
     // Email pinging Admin
-    $headers	= "Content-Type: text/plain; charset=iso-8859-1\n";
-    $headers	.= "From: $fullName <$email>\n";
-    $recipient	= "ari@aris.work";
-    $subject	= "Someone Certified Themselves";
-    $message	= wordwrap($certification, 1024);
-    mail($recipient, $subject, $message, $headers);
+    // $headers	= "Content-Type: text/plain; charset=iso-8859-1\n";
+    // $recipient	= "ari@aris.work";
+    // $recipient  = "justin%40thrivera.io";
+    // $subject	= "Someone Certified Themselves";
+    // $message    = "Hello World!";
+    // $message	= wordwrap($certification, 1024);
+    // $headers	= "From: $fullName <$email>\n";
+    // mail($recipient, $subject, $message, $headers);
+    // mail($recipient, $subject, $message);
 
+    $to      = 'justin@thrivera.io';
+    $subject = 'Someone Certified Themselves';
+    $message = 'hello';
+    $headers = 'From: webmaster@example.com' . "\r\n" .
+        'Reply-To: webmaster@example.com' . "\r\n" .
+        'X-Mailer: PHP/' . phpversion();
+
+    mail($to, $subject, $message, $headers);
     include 'templates/footer.php';
 
 ?>

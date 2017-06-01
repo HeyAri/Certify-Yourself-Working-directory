@@ -71,11 +71,6 @@
         </div>
     </section>
     <section class="mbr-section" id="form1-3" style="background-color: rgb(255, 255, 255); padding-top: 60px; padding-bottom: 60px;">
-
-        <?php
-            // this starts the session
-            session_start();
-        ?>
         <div  align="center">
             <legend>Certify Yourself</legend>
         </div>
@@ -85,7 +80,7 @@
                     <td>
                         <label class="col-md-4 text-right control-label" for="fullName">Full Name</label>
                         <div class="col-md-4">
-                            <input id="fullName" name="fullName" type="text" placeholder="First Last" class="form-control input-md" required type="text">
+                            <input id="fullName" name="fullName" type="text" placeholder="Full Name" class="form-control input-md" required type="text">
                         </div>
                     </td>
                 </tr>
@@ -93,7 +88,7 @@
                     <td>
                         <label class="col-md-4 text-right control-label" for="email">Email</label>
                         <div class="col-md-4">
-                            <input id="email" name="email" placeholder="name@domain.com" class="form-control input-md" required type="text">
+                            <input id="email" name="email" placeholder="name@domain.extension" class="form-control input-md" required type="text">
                         </div>
                     </td>
                 </tr>
@@ -139,9 +134,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <label class="col-md-4 text-right control-label" for="cert">You Selected</label>
+                        <label class="col-md-4 text-right control-label" for="certification">You Selected</label>
                         <div class="col-md-4">
-                            <input type="text" name="certification" id="certification" placeholder="Or type yours in here" class="form-control input-md" required>
+                            <input type="text" name="certification" id="certification" placeholder="Or type yours in here" class="form-control input-md" required readonly>
                         </div>
                         <br>
                         <br>
@@ -149,23 +144,55 @@
                 </tr>
                 <tr>
                     <td>
-                        <label class="col-md-4 text-right control-label" for="cert">Certificate Color</label>
+                        <label class="col-md-4 text-right control-label" />Select a style:</label>
                         <div class="col-md-4">
-                            <select id="color" name="color" class="form-control">
-                                <option selected>Select your certificate border color</option>
-                                <option value="blk">Plain old black</option>
-                                <option value="royal">Plain old blue</option>
-                                <option value="grn">Plain old green</option>
-                                <option value="red">Plain old red</option>
-                                <!-- <option value="grn_brn">Plain-ish green</option> -->
-                                <!-- <option value="curly">Regular ornate</option> -->
-                                <!-- <option value="gold">Super ornate</option> -->
-                            </select>
+                            <!-- Displaying Certificates instead of the Dropdown -->
+                            <!-- Using a label to wrap both a radio button and the image -->
+                            <label>
+                                <input type="radio" name="certColor" value="curly"/>
+                                <img src="images/C4C-curly-thmb.png" />
+                            </label>
+                            <label>
+                                <input type="radio" name="certColor" value="gold"/>
+                                <img src="images/C4C-gold-thmb.png" />
+                            </label>
+                            <label>
+                                <input type="radio" name="certColor" value="emerald"/>
+                                <img src="images/C4C-emerald-thmb.png" />
+                            </label>
+                            <label>
+                                <input type="radio" name="certColor" value="black"/>
+                                <img src="images/C4C-black-thmb.png" />
+                            </label>
+                            <label>
+                                <input type="radio" name="certColor" value="green"/>
+                                <img src="images/C4C-green-thmb.png" />
+                            </label>
+                            <label>
+                                <input type="radio" name="certColor" value="red"/>
+                                <img src="images/C4C-red-thmb.png" />
+                            </label>
+                            <label>
+                                <input type="radio" name="certColor" value="blue"/>
+                                <img src="images/C4C-blue-thmb.png" />
+                            </label>
                         </div>
                         <br>
                         <br>
                     </td>
                 </tr>
+                <style>
+                    form tr td div label input{
+                        display: none;
+                    }
+                    label > input + img{ /* IMAGE STYLES */
+                        cursor:pointer;
+                        border:2px solid transparent;
+                    }
+                    label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+                        border:2px solid #f00;
+                    }
+                </style>
                 <tr>
                     <td>
                         <!-- Multiple Radios -->
@@ -186,16 +213,6 @@
                 </tr>
                 <tr>
                     <td>
-                        <div class="text-center" id="thumbnail"></div>
-                        <script>
-                            $('#color').change(function(){
-                                $('#thumbnail').html('<img src="images/C4C-'+ $('#color').val() +'-thmb.png" />')
-                            });
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         <!-- Button -->
                         <div class="form-group" align="center">
                             <button id="submit" name="submit" class="btn btn-primary" align="center" value="Generate Certificate">Get Your Certificate</button>
@@ -203,12 +220,8 @@
                     </td>
                 </tr>
             </table>
-            <!-- make sure we send our variables through this form page to the next one -->
-            <input type="hidden" name="certDate" value="<?php echo  $_SESSION['certDate']; ?>">
-            <input type="hidden" name="fullName" value="<?php echo  $_SESSION['fullName']; ?>">
-            <input type="hidden" name="email" value="<?php echo  $_SESSION['email']; ?>">
-            <input type="hidden" name="cert" value="<?php echo  $_SESSION['certification']; ?>">
-            <input type="hidden" name="color" value="<?php echo  $_SESSION['color']; ?>">
+            <!-- Everything has been filled out except for the timestamp, so we include that as a hidden variable -->
+            <input type="hidden" name="certDate" value="<?php echo  date("F j, Y"); ?>" />
         </form>
         <style>
             .control-label {
@@ -223,7 +236,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 text-xs-center">
-                        <h3 class="mbr-section-title display-2">What Our Fantastic Certifi-ees Say</h3>
+                        <h3 class="mbr-section-title display-2">What Our Fantastic Certify-ees Say</h3>
                     </div>
                 </div>
             </div>
