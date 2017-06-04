@@ -38,7 +38,6 @@
         </center>
     </section>
 <?php
-
     // Email pinging Admin
     // $headers	= "Content-Type: text/plain; charset=iso-8859-1\n";
     // $recipient	= "ari@aris.work";
@@ -49,15 +48,13 @@
     // $headers	= "From: $fullName <$email>\n";
     // mail($recipient, $subject, $message, $headers);
     // mail($recipient, $subject, $message);
-
-    $to      = 'justin@thrivera.io';
+    $to      = 'dr-cert@center4certs.org';
     $subject = 'Someone Certified Themselves';
     $message = 'hello';
-    $headers = 'From: webmaster@example.com' . "\r\n" .
-        'Reply-To: webmaster@example.com' . "\r\n" .
+    $headers = 'From: Dr-cert@center4certs.org' . "\r\n" .
+        'Reply-To: Center4certs.org' . "\r\n" .
         'X-Mailer: PHP/' . phpversion();
-
     mail($to, $subject, $message, $headers);
     include 'templates/footer.php';
-
 ?>
+
