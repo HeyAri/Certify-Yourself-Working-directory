@@ -1,4 +1,6 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
     include 'templates/head.php';
 ?>
 
@@ -39,25 +41,26 @@
     </section>
 <?php
 
-    // Email pinging Admin
-    // $headers	= "Content-Type: text/plain; charset=iso-8859-1\n";
-    // $recipient	= "ari@aris.work";
-    // $recipient  = "justin%40thrivera.io";
-    // $subject	= "Someone Certified Themselves";
-    // $message    = "Hello World!";
-    // $message	= wordwrap($certification, 1024);
-    // $headers	= "From: $fullName <$email>\n";
-    // mail($recipient, $subject, $message, $headers);
-    // mail($recipient, $subject, $message);
+    require 'includes/PHPMailer-master/PHPMailerAutoload.php';
 
-    $to      = 'justin@thrivera.io';
-    $subject = 'Someone Certified Themselves';
-    $message = 'hello';
-    $headers = 'From: webmaster@example.com' . "\r\n" .
-        'Reply-To: webmaster@example.com' . "\r\n" .
-        'X-Mailer: PHP/' . phpversion();
+    $mail = new PHPMailer;
+    $mail->setFrom('dr-cert@center4certs.org', 'Dr. Cert');         // How you wanna see it in your inbox
+    $mail->addAddress('chiou.kai@gmail.com','Justin Chiou');        // Whom it's being sent to
+    // $mail->addAddress('ari@aris.work');                          // Name is also optional
+    // $mail->addReplyTo('info@example.com', 'Information');        // In case you wanna send to client
+    // $mail->addAttachment('/var/tmp/file.tar.gz');                // Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');           // Optional name
+    $mail->isHTML(true);                                            // Set email format to HTML
+    $mail->Subject = 'Someone Certified Themselves!';
+    $mail->Body    = $_POST['fullName'].' certified him/herself.';
+    $mail->AltBody = $_POST['fullName'].' certified him/herself.';  // non-HTML clients
+    if(!$mail->send()) {
+        echo 'Message could not be sent.<br />';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;                   // Shows at the bottom of the page
+    } else {
+        echo 'Message has been sent';                               // Shows at the bottom of the page
+    }
 
-    mail($to, $subject, $message, $headers);
     include 'templates/footer.php';
 
 ?>
