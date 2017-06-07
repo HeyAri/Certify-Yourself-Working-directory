@@ -1,4 +1,6 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
     include 'templates/head.php';
 ?>
 
@@ -12,7 +14,7 @@
                             <a href="HTTP://center4certs.org" class="navbar-logo">
                                 <img src="assets/images/c4c-logo-2000x1241.png" alt="Center For Certification" title="Center For Certification">
                             </a>
-                            <a class="navbar-caption" href="index.php">Center For Certification</a>
+                            <a class="navbar-caption" href="index.php"><font color="grey">Center For Certification</font></a>
                         </div>
                     </div>
                 </div>
@@ -23,49 +25,45 @@
         </nav>
     </section>
     <section>
-
-    <?php
-
-        // this starts the session
-        session_start();
-
-        // little script to pull the current date/time; can also be done via JavaScript or 100 other ways
-        include($_SERVER['DOCUMENT_ROOT']."/includes/now.fn");
-
-        // this pulls input variables from the session form
-        $_SESSION['fullName']		= $_POST['fullName'];
-        $_SESSION['email']			= $_POST['email'];
-        $_SESSION['certification'] 	= $_POST['certification'];
-        $_SESSION['color'] 			= $_POST['color'];
-
-    ?>
         <center>
-            <table width="1000" height="768" border="0" cellpadding="2" cellspacing="2" background="
-            <?php echo  $_SESSION['color']; ?>">
-            	<tr>
-            		<td width="958" align="center">
-                    	<h3><font face="klarissa_contourregular"><?php echo date('jS \of F\, Y'); ?></font><br /></h3>
+            <div style="position: absolute" width="1000" height="768" border="0"> <img src="images/C4C-<?php echo $_POST['certColor']; ?>.png"></div>
+                <div align="center" style="position: absolute; left: 301px; top: 210px; width: 418px; height: 429px;" width="1000" text-align: center;>
+                        <h3><font face="klarissa_contourregular"><?php echo $_POST['certDate'] ?></font><br /></h3>
                     		<img src="images/spacer.gif" width="415" height="106"><br>
-            			<h2><font face="klarissa_contourregular"><?php echo  $_SESSION['certification']; ?></font><br /></h2>
+            			<h2><font face="klarissa_contourregular"><?php echo  $_POST['certification']; ?></font><br /></h2>
             				<img src="images/spacer.gif" width="413" height="98"><br>
-            			<h1><font face="klarissa_contourregular"><?php echo  $_SESSION['fullName']; ?></font><br />
-                        </h1>
-                	</td>
-            	</tr>
-            </table>
+            			<h1><font face="klarissa_contourregular"><?php echo  $_POST['fullName']; ?></font><br /></h1>
+                	</div>
         </center>
     </section>
-
+     <center>
 <?php
 
-    // Email pinging Admin
-    $headers	= "Content-Type: text/plain; charset=iso-8859-1\n";
-    $headers	.= "From: $fullName <$email>\n";
-    $recipient	= "ari@aris.work";
-    $subject	= "Someone Certified Themselves";
-    $message	= wordwrap($certification, 1024);
-    mail($recipient, $subject, $message, $headers);
+    require 'includes/PHPMailer-master/PHPMailerAutoload.php';
+
+    $mail = new PHPMailer;
+    $mail->setFrom('dr-cert@center4certs.org', 'Dr. Cert');         // How you wanna see it in your inbox
+    $mail->addAddress('dr-cert@center4certs.org', 'Dr. Cert');        // Whom it's being sent to
+    // $mail->addAddress('dr-cert@center4certs.org');                          // Name is also optional
+    // $mail->addReplyTo('info@example.com', 'Information');        // In case you wanna send to client
+    // $mail->addAttachment('/var/tmp/file.tar.gz');                // Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');           // Optional name
+    $mail->isHTML(true);                                            // Set email format to HTML
+    $mail->Subject = $_POST['fullName'].' Certified Themself!';
+    $mail->Body    = $_POST['fullName'].' is now'."<br />";
+	$mail->Body    .= $_POST['certification'].' as of '."<br />";
+	$mail->Body    .= $_POST['certDate'].' and received a '."<br />";
+	$mail->Body    .= $_POST['certColor'].' certificate.'."<br /><br />";
+	$mail->Body    .= $_POST['email'].' '."<br />";
+	
+    if(!$mail->send()) {
+        echo 'Page could not be sent.<br />';
+        echo 'Page Error: ' . $mail->ErrorInfo;                   // Shows at the bottom of the page
+    } else {
+        echo 'You are officially certified by the powers vested in the Center for Certification.';                               // Shows at the bottom of the page
+    }
 
     include 'templates/footer.php';
 
 ?>
+ </center>
